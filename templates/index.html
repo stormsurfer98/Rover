@@ -55,9 +55,6 @@
                         <!-- START NAVIGATION MENU ITEMS -->
                         <ul>
                             <li><a href="index.html#" data-slide="home" class="active">Home</a></li>
-                            <li><a href="index.html#" data-slide="subscribe">Subscribe</a></li>
-                            <li><a href="index.html#" data-slide="about">About</a></li>
-                            <li><a href="index.html#" data-slide="services">Services</a></li>
                             <li><a href="index.html#" data-slide="contact">Contact</a></li>
                         </ul>
                         <!-- END NAVIGATION MENU ITEMS -->
@@ -83,19 +80,36 @@
                                                 <div class="slide-content">
                                                     <div class="row">
                                                         <div class="col-lg-6 col-md-6 svm">
-                                                            <div class="section-info text-left" style="border: 2px solid black;">
-                                                                
+                                                            <div class="section-info text-left">
+                                                                <!-- START TITLE -->
+                                                                <h2 class="section-title text-default animated" data-animation="fadeIn" data-animation-delay="50" style="margin-bottom: 20px">
+                                                                    Budget
+                                                                </h2>
                                                             </div>
                                                         </div>
                                                         <div class="col-lg-5 col-lg-offset-1 col-md-6 svm">
-                                                            <div class="section-info text-right" style="border: 2px solid black;">
+                                                            <div class="section-info text-left">
                                                                 <!-- START TITLE -->
-                                                                <h2 class="section-title text-default animated" data-animation="fadeIn" data-animation-delay="50">Destinations
+                                                                <h2 class="section-title text-default animated" data-animation="fadeIn" data-animation-delay="50" style="margin-bottom: 20px">
+                                                                    Destination
                                                                 </h2>
                                                                 <!-- END TITLE -->
-                                                                <input type="text" name="fname"><br><br>
-                                                                <a href="index.html#" class="btn go-slide animated" data-animation="fadeIn" data-animation-delay="60" data-slide="about">Add Location</a>
-                                                                <a href="index.html#" class="btn btn-inverse go-slide animated" data-animation="fadeIn" data-animation-delay="60" data-slide="subscribe">Plan Trip</a>
+                                                                <form id="contact-form" class="contact-form">
+                                                                    <div class="row">
+                                                                        <div class="col-md-12 animated" data-animation="fadeIn" data-animation-delay="200">
+                                                                            <input type="text" name="contact-subject" placeholder="City" class="contact-form-subject required">
+                                                                        </div>
+                                                                        <div class="col-lg-6 col-md-6 col-md-12 animated" data-animation="fadeIn" data-animation-delay="200">
+                                                                            <input type="text" name="contact-subject" placeholder="Start" class="contact-form-subject required">
+                                                                        </div>
+                                                                        <div class="col-lg-6 col-md-6 col-md-12 animated" data-animation="fadeIn" data-animation-delay="200">
+                                                                            <input type="text" name="contact-subject" placeholder="End" class="contact-form-subject required">
+                                                                        </div>
+                                                                    </div>
+                                                                </form>
+                                                                <center>
+                                                                    <a href="index.html#" class="btn btn-inverse go-slide animated" data-animation="fadeIn" data-animation-delay="60" data-slide="subscribe">Plan Trip</a>
+                                                                </center>
                                                             </div>
                                                         </div>
                                                     </div>
