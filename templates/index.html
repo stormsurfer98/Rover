@@ -10,22 +10,22 @@
         <meta name="keywords" content="">
         <meta name="author" content="">
         <!-- CSS Implementing Plugins -->
-        <link rel="stylesheet" href="assets/css/font-awesome.min.css">
-        <link rel="stylesheet" href="assets/css/bicolor.min.css">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/font-awesome.min.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/bicolor.min.css') }}">
         <!-- CSS Global Compulsory -->
-        <link rel="stylesheet" href="assets/css/bootstrap.min.css">
-        <link rel="stylesheet" href="assets/css/animate.min.css">
-        <link rel="stylesheet" href="assets/css/style.css">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/animate.min.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
         <!--<link rel="stylesheet" href="assets/css/custom.css">-->
         <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!--[if lt IE 9]>
         <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
         <![endif]-->
         <!-- FAVICONS -->
-        <link rel="shortcut icon" href="assets/img/favicon.png">
-        <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
-        <link rel="apple-touch-icon" sizes="72x72" href="assets/img/apple-touch-icon-72x72.png">
-        <link rel="apple-touch-icon" sizes="114x114" href="assets/img/apple-touch-icon-114x114.png">
+        <link rel="shortcut icon" href="{{ url_for('static', filename='img/favicon.png') }}">
+        <link rel="apple-touch-icon" href="{{ url_for('static', filename='img/apple-touch-icon.png') }}">
+        <link rel="apple-touch-icon" href="{{ url_for('static', filename='img/apple-touch-icon-72x72.png') }}">
+        <link rel="apple-touch-icon" href="{{ url_for('static', filename='img/apple-touch-icon-114x114.png') }}">
     </head>
     <body>
         <div id="awd-site-wrap" class="bg bg-home">
@@ -361,10 +361,10 @@
             </footer>
         </div>
         <!-- JS -->
-        <script type="text/javascript" src="assets/js/jquery-1.11.3.min.js"></script>
-        <script type="text/javascript" src="assets/js/bootstrap.min.js"></script>
-        <script type="text/javascript" src="assets/js/vendor.js"></script>
-        <script type="text/javascript" src="assets/js/options-v=2.js"></script>
-        <script type="text/javascript" src="assets/js/main-v=1.js"></script>
+        <script type="text/javascript" src="{{ url_for('static', filename='js/jquery-1.11.3.min.js') }}"></script>
+        <script type="text/javascript" src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+        <script type="text/javascript" src="{{ url_for('static', filename='js/vendor.js') }}"></script>
+        <script type="text/javascript" src="{{ url_for('static', filename='js/options-v=2.js') }}"></script>
+        <script type="text/javascript" src="{{ url_for('static', filename='js/main-v=1.js') }}"></script>
     </body>
 </html>
