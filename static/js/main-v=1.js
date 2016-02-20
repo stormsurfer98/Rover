@@ -494,7 +494,53 @@
       if (address) document.getElementById('autocomplete').value = address;
     });
   }
-
+/*
+  function findFlight() {
+    if (!destination) throw "Nowhere to go!";
+    var airportFrom = "DTW"; // Always starting from Detroit
+    var airportTo = destination.address_components[0].long_name;
+    var date = $("
+    req = "http://iatacodes.org/api/v4/autocomplete?api_key=1c5694b4-90da-4e17-89b1-12862c708769&query=" + airportTo;
+    res = $.get(req, function(data) {
+      airportCode = data.response.airports_by_cities[0];
+      passengerInfo = {
+        "request": {
+          "passengers": {
+            "kind": "qpxexpress#passengerCounts",
+            "adultCount": 1,
+          },
+        "slice": [
+    {
+      "kind": "qpxexpress#sliceInput",
+        "origin": airportFrom,
+        "destination": airportTo,
+        "date": string,
+        "maxStops": integer,
+        "maxConnectionDuration": integer,
+        "preferredCabin": string,
+        "permittedDepartureTime": {
+          "kind": "qpxexpress#timeOfDayRange",
+          "earliestTime": string,
+          "latestTime": string
+        },
+        "permittedCarrier": [
+          string
+          ],
+        "alliance": string,
+        "prohibitedCarrier": [
+          string
+          ]
+    }
+    ],
+      "maxPrice": string,
+      "saleCountry": string,
+      "refundable": boolean,
+      "solutions": integer
+        }
+      }
+    });
+  }
+*/
 
   ///** DOCUMENT READY **/
 
