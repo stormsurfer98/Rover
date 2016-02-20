@@ -470,6 +470,30 @@
 
   }
 
+  function autocompletePlaces() {
+    // Places autcomplete data in text field
+    var placeSearch, autocomplete;
+    var componentForm = {
+      administrative_area_level_3: 'long_name',
+      administrative_area_level_1: 'short_name',
+      country: 'short_name'
+    };
+
+    autocomplete = new google.maps.places.Autocomplete(document.getElementById('autocomplete'), {types: ['geocode']});
+    autocomplete.addListener('place_changed', function() {
+      var place = autocomplete.getPlace();
+      var address = '';
+      for (var i = 0; i < place.address_components.length; i++) {
+        var addressType = place.address_components[i].types[0];
+        if (componentForm[addressType]) {
+          var val = place.address_components[i][componentForm[addressType]];
+          address.concat(", " + val);
+        }
+      }
+      if (address) document.getElementById('autocomplete').value = address;
+    });
+  }
+
 
   ///** DOCUMENT READY **/
 
@@ -501,15 +525,8 @@
       });
     }
 
-    // Places autcomplete text field
-    var defaultBounds = new google.maps.LatLngBounds(
-        new google.maps.LatLng(-90, -180),
-        new google.maps.LatLng( 90,  180));
-    var input = document.getElementById("autocomplete");
-    var options = { bounds: defaultBounds, types: ["(cities)"] };
-    var autocomplete = new google.maps.places.Autocomplete(input, options);
+    autocompletePlaces();
 
-    autocomplete.addListener('place_changed', console.log(autocomplete));
   });
 
 
