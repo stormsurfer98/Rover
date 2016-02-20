@@ -502,13 +502,14 @@
     }
 
     // Places autcomplete text field
-
     var defaultBounds = new google.maps.LatLngBounds(
         new google.maps.LatLng(-90, -180),
         new google.maps.LatLng( 90,  180));
-    var input = $("input[placeholder='City']")[0];
+    var input = document.getElementById("autocomplete");
     var options = { bounds: defaultBounds, types: ["(cities)"] };
-    autocomplete = new google.maps.places.Autocomplete(input, options);
+    var autocomplete = new google.maps.places.Autocomplete(input, options);
+
+    autocomplete.addListener('place_changed', console.log(autocomplete));
   });
 
 
