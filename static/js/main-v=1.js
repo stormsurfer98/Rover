@@ -469,6 +469,10 @@
     });
 
   }
+
+
+  ///** FUNCTIONS **/
+
   var destination;
   function autocompletePlaces() {
     // Places autcomplete data in text field
@@ -502,7 +506,7 @@
     startdate = $.datepicker.format('yyyy-mm-dd', startdate);
     var enddate = $.datepicker.parseDate('mm/dd/yyyy', $("input[name=end-date]"));
     enddate = $.datepicker.format('yyyy-mm-dd', enddate);
-/*
+    /*
     req = "http://iatacodes.org/api/v4/autocomplete?api_key=1c5694b4-90da-4e17-89b1-12862c708769&query=" + airportTo;
     res = $.get(req, function(data) {
       airportCode = data.response.airports_by_cities[0];
@@ -542,7 +546,7 @@
         }
       }
     });
-*/
+    */
   }
 
   ///** DOCUMENT READY **/
