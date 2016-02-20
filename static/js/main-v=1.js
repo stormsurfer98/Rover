@@ -469,7 +469,7 @@
     });
 
   }
-
+  var destination;
   function autocompletePlaces() {
     // Places autcomplete data in text field
     var placeSearch, autocomplete;
@@ -482,6 +482,7 @@
     autocomplete = new google.maps.places.Autocomplete(document.getElementById('autocomplete'), {types: ['geocode']});
     autocomplete.addListener('place_changed', function() {
       var place = autocomplete.getPlace();
+      destination = place;
       var address = '';
       for (var i = 0; i < place.address_components.length; i++) {
         var addressType = place.address_components[i].types[0];
