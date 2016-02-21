@@ -194,6 +194,7 @@ function findFoodandEvents(longitude, latitude) {
     if(current.getHours() < 14) {
       time = current.getHours().toString() + ":" + current.getMinutes().toString() + " to " + (current.getHours()+1).toString() + ":" + current.getMinutes().toString();
       ev = restaurants.pop();
+      console.log(ev);
       addToTable([startString, time, ev.name, "", ev.url]);
       lastTime = addMinutes(lastTime, 120);
       current = new Date(parseInt(startDate.substring(6, 10)), parseInt(startDate.substring(0, 2))-1, parseInt(startDate.substring(3, 5)), parseInt(lastTime.substring(0, 2)), parseInt(lastTime.substring(3, 5)));
