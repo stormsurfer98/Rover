@@ -37,30 +37,30 @@ function findFlight() {
   $.get(url, function(data) {
     airportTo = data.response.airports_by_cities[0];
     var passInfo = {
-      "request": {
-        "slice": [
-          {
-            "origin": airportFrom,
-            "destination": airportTo,
-            "date": startString
-          },
-          {
-            "origin": airportTo,
-            "destination": airportFrom,
-            "date": endString
-          }
-        ],
-        "passengers": {
-          "adultCount": 1,
-          "infantInLapCount": 0,
-          "infantInSeatCount": 0,
-          "childCount": 0,
-          "seniorCount": 0
-        },
-        "solutions": 1,
-        "refundable": false
+  "request": {
+    "slice": [
+      {
+        "origin": "DTW",
+        "destination": "IAD",
+        "date": "2016-03-20"
+      },
+      {
+        "origin": "IAD",
+        "destination": "DTW",
+        "date": "2016-03-25"
       }
-    };
+    ],
+    "passengers": {
+      "adultCount": 1,
+      "infantInLapCount": 0,
+      "infantInSeatCount": 0,
+      "childCount": 0,
+      "seniorCount": 0
+    },
+    "solutions": 20,
+    "refundable": false
+  }
+};
     $.post("https://www.googleapis.com/qpxExpress/v1/trips/search?key=AIzaSyBHUfsS5k8fWdr6V_151x2kFKoRgTUx_Io", passInfo, function(data) {
       var departureTime1 = formatString(data["tripOption"][0]["slice"][0]["segment"]["leg"]["departureTime"]);
       var arrivalTime1 = formatString(data["tripOption"][0]["slice"][0]["segment"]["leg"]["arrivalTime"]);
