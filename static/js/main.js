@@ -119,14 +119,14 @@ function findHotel(longitude, latitude) {
 	request.complete(function(data) {
 		var allocated = budget*0.25;
 		var output = [];
-		for(var i=0; i<data["HotelCount"]; i++) {
-			if(parseInt(data["HotelInfoList"]["HotelInfo"][i]["FeaturedOffer"]["Price"]["TotalRate"]) <= allocated) {
+		for(var i=0; i<data["responseJSON"]["HotelCount"]; i++) {
+			if(parseInt(data["responseJSON"]["HotelInfoList"]["HotelInfo"][i]["FeaturedOffer"]["Price"]["TotalRate"]) <= allocated) {
 				output = [
 					startDate,
 					addMinutes(lastTime, 60) + " to " + addMinutes(lastTime, 90),
-					"Check-in: " + data["HotelInfoList"]["HotelInfo"][i]["Name"],
-					parseInt(data["HotelInfoList"]["HotelInfo"][i]["FeaturedOffer"]["Price"]["TotalRate"]),
-					data["HotelInfoList"]["HotelInfo"][i]["DetailsUrl"]
+					"Check-in: " + data["responseJSON"]["HotelInfoList"]["HotelInfo"][i]["Name"],
+					parseInt(data["responseJSON"]["HotelInfoList"]["HotelInfo"][i]["FeaturedOffer"]["Price"]["TotalRate"]),
+					data["responseJSON"]["HotelInfoList"]["HotelInfo"][i]["DetailsUrl"]
 				];
 				break;
 			}
