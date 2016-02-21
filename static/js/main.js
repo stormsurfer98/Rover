@@ -175,13 +175,12 @@ function findFoodandEvents(longitude, latitude) {
       type: "GET"
   });
   request.complete(function(data) {
-    console.log(data);
     var listOfVenues = data.responseJSON.response.venues;
     var events = [];
     for(var i=0; i<listOfVenues.length; i++) {
         events.push(listOfVenues[i]);
     }
-    
+
     //first day
     //lunch (1 hr)
     lastTime = addMinutes(lastTime, 60);
@@ -218,6 +217,7 @@ function findFoodandEvents(longitude, latitude) {
       var hr = getRandomInt(11, 14);
 
       //lunch (1 hr)
+      console.log(asString(current));
       time = hr.toString() + ":00 to " + (hr+1).toString() + ":00";
       ev = events.pop();
       addToTable(asString(current), time, ev.name, "", ev.url);
