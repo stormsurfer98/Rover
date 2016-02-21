@@ -103,7 +103,7 @@ function findFlight() {
       }
     };
     var request = $.ajax({
-      url: "https://www.googleapis.com/qpxExpress/v1/trips/search?key=AIzaSyBHUfsS5k8fWdr6V_151x2kFKoRgTUx_Io",
+      url: "https://www.googleapis.com/qpxExpress/v1/trips/search?key=AIzaSyAoDBC4lSlOWR1Lf2aJzBKTrLm7eaBM9-4",
         data: JSON.stringify(passInfo),
         contentType: "application/json",
         async: true,
@@ -188,8 +188,7 @@ function findFoodandEvents(longitude, latitude) {
     if(current.getHours() < 14) {
       time = current.getHours().toString() + ":" + current.getMinutes().toString() + " to " + (current.getHours()+1).toString() + ":" + current.getMinutes().toString();
       var ev = events.pop();
-      console.log(ev);
-      addToTable([startString, time, ev.name + " (Lunch)", "Unknown", ev.url]);
+      addToTable([asString(current), time, ev.name + " (Lunch)", "Unknown", ev.url]);
       lastTime = addMinutes(lastTime, 120);
       current = new Date(parseInt(startDate.substring(6, 10)), parseInt(startDate.substring(0, 2))-1, parseInt(startDate.substring(3, 5)), parseInt(lastTime.substring(0, 2)), parseInt(lastTime.substring(3, 5)));
     }
@@ -198,7 +197,7 @@ function findFoodandEvents(longitude, latitude) {
     if(current.getHours() < 16) {
       time = current.getHours().toString() + ":" + current.getMinutes().toString() + " to " + (current.getHours()+5).toString() + ":" + current.getMinutes().toString();
       ev = events.pop();
-      addToTable([startString, time, ev.name + " (Activity)", "Unknown", ev.url]);
+      addToTable([asString(current), time, ev.name + " (Activity)", "Unknown", ev.url]);
       lastTime = addMinutes(lastTime, 360);
       current = new Date(parseInt(startDate.substring(6, 10)), parseInt(startDate.substring(0, 2))-1, parseInt(startDate.substring(3, 5)), parseInt(lastTime.substring(0, 2)), parseInt(lastTime.substring(3, 5)));
     }
@@ -207,7 +206,7 @@ function findFoodandEvents(longitude, latitude) {
     if(current.getHours() < 22) {
       time = current.getHours().toString() + ":" + current.getMinutes().toString() + " to " + (current.getHours()+1).toString() + ":" + current.getMinutes().toString();
       ev = events.pop();
-      addToTable([startString, time, ev.name + " (Dinner)", "Unknown", ev.url]);
+      addToTable([asString(current), time, ev.name + " (Dinner)", "Unknown", ev.url]);
     }	
     current.setDate(current.getDate() + 1);
 
@@ -217,7 +216,6 @@ function findFoodandEvents(longitude, latitude) {
       var hr = getRandomInt(11, 14);
 
       //lunch (1 hr)
-      console.log(asString(current));
       time = hr.toString() + ":00 to " + (hr+1).toString() + ":00";
       ev = events.pop();
       addToTable([asString(current), time, ev.name + " (Lunch)", "Unknown", ev.url]);
