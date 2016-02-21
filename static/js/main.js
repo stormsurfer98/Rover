@@ -121,12 +121,12 @@ function findHotel(longitude, latitude) {
 		var output = [];
 		for(var i=0; i<data["responseJSON"]["HotelCount"]; i++) {
 			if(parseInt(data["responseJSON"]["HotelInfoList"]["HotelInfo"][i]["StatusCode"]) != 1) {
-				if(parseInt(data["responseJSON"]["HotelInfoList"]["HotelInfo"][i]["FeaturedOffer"]["Price"]["TotalRate"]) <= allocated) {
+				if(parseInt(data["responseJSON"]["HotelInfoList"]["HotelInfo"][i]["Price"]["TotalRate"]["Value"]) <= allocated) {
 					output = [
 						startDate,
 						addMinutes(lastTime, 60) + " to " + addMinutes(lastTime, 90),
 						"Check-in: " + data["responseJSON"]["HotelInfoList"]["HotelInfo"][i]["Name"],
-						parseInt(data["responseJSON"]["HotelInfoList"]["HotelInfo"][i]["FeaturedOffer"]["Price"]["TotalRate"]),
+						parseInt(data["responseJSON"]["HotelInfoList"]["HotelInfo"][i]["Price"]["TotalRate"]["Value"]),
 						data["responseJSON"]["HotelInfoList"]["HotelInfo"][i]["DetailsUrl"]
 					];
 					break;
@@ -135,11 +135,12 @@ function findHotel(longitude, latitude) {
 		}
 		lastTime = addMinutes(lastTime, 90);
 		addToTable(output);
-		//do stuff
 		output[0] = endDate;
 		output[1] = subtractMinutes(leaveTime, 90) + " to " + subtractMinutes(leaveTime, 60);
 		output[2] = output[2].replace("Check-in", "Check-out");
+		budget = budget - output[3];
 		output[3] = 0;
+		//do stuff
 		addToTable(output);
 	});
 }
