@@ -36,7 +36,7 @@ function subtractMinutes(time, minutes) {
 
 function daysBetween(firstDate, secondDate) {
 	var oneDay = 24*60*60*1000;
-	return(Math.round(Math.abs((firstDate.getTime() - secondDate.getTime())/(oneDay))));
+	return(Math.round(Math.abs(((new Date(firstDate)).getTime() - (new Date(secondDate)).getTime())/(oneDay))));
 }
 
 function formatDate(dateString) {
