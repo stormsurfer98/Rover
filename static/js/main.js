@@ -168,7 +168,7 @@ function findHotel(longitude, latitude) {
 }
 
 function findFoodandEvents(longitude, latitude) {
-  var url = "https://api.foursquare.com/v2/venues/search?ll=" + latitude + "," + longitude + "&client_id=KFSYUBEFSIF4BWHQN4WKWRX1MGGWQWO12BF5AZ0T12AGK1AL&client_secret=HSCRFAHT3DLO1SREGJ2HRP5OPQIN53IS5P4L0FL5432YICQO&v=20160221";
+  var url = "https://api.foursquare.com/v2/venues/search?ll=" + (latitude+0.1) + "," + (longitude+0.1) + "&client_id=KFSYUBEFSIF4BWHQN4WKWRX1MGGWQWO12BF5AZ0T12AGK1AL&client_secret=HSCRFAHT3DLO1SREGJ2HRP5OPQIN53IS5P4L0FL5432YICQO&v=20160221";
   var request = $.ajax({
     url: url,
       async: false,
