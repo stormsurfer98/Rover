@@ -17,7 +17,6 @@ function planTrip() {
 }
 
 function formatDate(dateString) {
-	console.log(dateString);
 	return(dateString.substring(dateString.indexOf("T"), dateString.lastIndexOf("-")));
 }
 
@@ -37,6 +36,8 @@ function findFlight() {
   var url = "http://iatacodes.org/api/v4/autocomplete?api_key=1c5694b4-90da-4e17-89b1-12862c708769&query=" + cityTo;
   $.get(url, function(data) {
     airportTo = data.response.airports_by_cities[0];
+    console.log(data);
+    console.log(airportTo);
     var passInfo = {
   	"request": {
     "slice": [
@@ -70,8 +71,6 @@ function findFlight() {
 			type: "POST"
     });
     request.complete(function(data) {
-    	console.log(data);
-    	console.log(data["responseJSON"]);
       var departureTime1 = formatDate(data["responseJSON"]["trips"]["tripOption"][0]["slice"][0]["segment"][0]["leg"][0]["departureTime"]);
       var arrivalTime1 = formatDate(data["responseJSON"]["trips"]["tripOption"][0]["slice"][0]["segment"][0]["leg"][0]["arrivalTime"]);
       var startTime = departureTime1 + " to " + arrivalTime1;
