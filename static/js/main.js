@@ -3,8 +3,10 @@ var months = 6;
 var budget = 0;
 
 function planTrip() {
+	if(document.getElementById("months").value.replace(/^\s+|\s+$/g, '') !== "") months = parseInt(document.getElementById("months").value.replace(/^\s+|\s+$/g, ''));
 	budget = savings*months;
-	console.log(budget);
+	if(document.getElementById("percent").value.replace(/^\s+|\s+$/g, '') !== "") budget *= parseFloat(document.getElementById("percent").value.replace(/^\s+|\s+$/g, ''))/100;
+	if(document.getElementById("manual").value.replace(/^\s+|\s+$/g, '') !== "") budget = parseInt(document.getElementById("manual").value.replace(/^\s+|\s+$/g, ''));
 	if(!destination) alert("Nowhere to go!");
 	else if(!document.getElementById("start-date").value.replace(/^\s+|\s+$/g, '').match(/(\d{2}\/){2}\d{4}/)) alert("Provide a valid start date!");
 	else if(!document.getElementById("end-date").value.replace(/^\s+|\s+$/g, '').match(/(\d{2}\/){2}\d{4}/)) alert("Provide a valid end date!");
@@ -16,6 +18,18 @@ function planTrip() {
 		document.getElementById("rows").innerHTML = "";
 		findFlight();
 	}
+}
+
+function removeRow(element) {
+	element.parentElement.parentElement.innerHTML = "";
+}
+
+function asString(date) {
+	return((date.getMonth()+1).toString() + "/" + date.getDate().toString() + "/" + date.getFullYear().toString());
+}
+
+function getRandomInt(min, max) {
+  return Math.floor(Math.random()*(max - min + 1) + min);
 }
 
 function addMinutes(time, minutes) {
@@ -51,7 +65,7 @@ function addToTable(data) {
 	str += "<td class='text-left'>" + data[1] + "</td>";
 	str += "<td class='text-left'><a href=\"" + data[4] + "\">" + data[2] + "</a></td>";
 	str += "<td class='text-left'>" + data[3] + "</td>";
-	str += "<td class='text-left'><a href='#' class='btn btn'>Remove</a></td></tr>";
+	str += "<td class='text-left'><a href='#' class='btn btn' onclick='removeRow(this)'>Remove</a></td></tr>";
 	document.getElementById("rows").innerHTML += str;
 }
 
@@ -154,25 +168,74 @@ function findHotel(longitude, latitude) {
 }
 
 function findFoodandEvents(longitude, latitude) {
-  /*
-  var findVenues = "https://api.foursquare.com/v2/venues/search?ll=" + latitude + "," + longitude + "&client_id=KFSYUBEFSIF4BWHQN4WKWRX1MGGWQWO12BF5AZ0T12AGK1AL&client_secret=HSCRFAHT3DLO1SREGJ2HRP5OPQIN53IS5P4L0FL5432YICQO&v=20160221"
-  var request = $.ajax({
-    url: findVenues,
-    async: true,
-    type: "GET"
-  });
+	var url = "https://api.foursquare.com/v2/venues/search?ll=" + latitude + "," + longitude + "&client_id=KFSYUBEFSIF4BWHQN4WKWRX1MGGWQWO12BF5AZ0T12AGK1AL&client_secret=HSCRFAHT3DLO1SREGJ2HRP5OPQIN53IS5P4L0FL5432YICQO&v=20160221";
+	var request = $.ajax({
+		url: url,
+		async: false,
+		type: "GET"
+	});
+	request.complete(function(data) {
+		var listOfVenues = data.response.venues;
+		var restaurants = [];
+		var events = [];
+		for(var i=0; i<listOfVenues.length; i++) {
+			if((listOfVenues[i].categories[0].name).indexOf("Restaurant") > -1) {
+				restaurants.push(listOfVenues[i]);
+			} else {
+				events.push(listOfVenues[i]);
+			}
+		}
+	});
 
-  request.complete(function(data) {
-    var listOfVenues = data.response.venues;
-    var restaurants = [];
-    var events = [];
-    for (var i = 0; i < listOfVenues.length; i++) {
-      if ((listOfVenues[i].categories[0].name).indexOf("Restaurant") > -1) {
-        restaurants.push(listOfVenues[i];
-      } else {
-        events.push(listOfVenues[i]);
-      }
-    }
-  });
-  */
+	//first day
+	//lunch (1 hr)
+	lastTime = addMinutes(lastTime, 60);
+	var current = new Date(parseInt(startDate.substring(6, 10)), parseInt(startDate.substring(0, 2))-1, parseInt(startDate.substring(3, 5)), parseInt(lastTime.substring(0, 2)), parseInt(lastTime.substring(3, 5)));
+	if(current.getHours() < 14) {
+		time = current.getHours().toString() + ":" + current.getMinutes().toString() + " to " + (current.getHours()+1).toString() + ":" + current.getMinutes().toString();
+		ev = restaurants.pop();
+		addToTable([startString, time, ev.name, "", ev.url]);
+		lastTime = addMinutes(lastTime, 120);
+		current = new Date(parseInt(startDate.substring(6, 10)), parseInt(startDate.substring(0, 2))-1, parseInt(startDate.substring(3, 5)), parseInt(lastTime.substring(0, 2)), parseInt(lastTime.substring(3, 5)));
+	}
+
+	//activity (5 hrs)
+	if(current.getHours() < 16) {
+		time = current.getHours().toString() + ":" + current.getMinutes().toString() + " to " + (current.getHours()+5).toString() + ":" + current.getMinutes().toString();
+		ev = events.pop();
+		addToTable([startString, time, ev.name, "", ev.url]);
+		lastTime = addMinutes(lastTime, 360);
+		current = new Date(parseInt(startDate.substring(6, 10)), parseInt(startDate.substring(0, 2))-1, parseInt(startDate.substring(3, 5)), parseInt(lastTime.substring(0, 2)), parseInt(lastTime.substring(3, 5)));
+	}
+
+	//dinner (1 hr)
+	if(current.getHours() < 22) {
+		time = current.getHours().toString() + ":" + current.getMinutes().toString() + " to " + (current.getHours()+1).toString() + ":" + current.getMinutes().toString();
+		ev = restaurants.pop();
+		addToTable([startString, time, ev.name, "", ev.url]);
+	}	
+	current.setDate(current.getDate() + 1);
+	
+	//days in between
+	var last = new Date(parseInt(endDate.substring(6, 10)), parseInt(endDate.substring(0, 2))-1, endDate(startDate.substring(3, 5)));
+	while((new Date(current.getFullYear(), current.getMonth(), current.getDate())).getTime() < last.getTime()) {
+		var hr = getRandomInt(11, 14);
+
+		//lunch (1 hr)
+		time = hr.toString() + ":00 to " + (hr+1).toString() + ":00";
+		ev = restaurants.pop();
+		addToTable(asString(current), time, ev.name, "", ev.url);
+
+		//activity (5 hrs)
+		time = (hr+2).toString() + ":00 to " + (hr+7).toString() + ":00";
+		ev = events.pop();
+		addToTable(asString(current), time, ev.name, "", ev.url);
+
+		//dinner (1 hr)
+		time = (hr+8).toString() + ":00 to " + (hr+9).toString() + ":00";
+		ev = restaurants.pop();
+		addToTable(asString(current), time, ev.name, "", ev.url);
+
+		current.setDate(current.getDate() + 1);
+	}
 }
