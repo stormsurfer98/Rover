@@ -120,15 +120,17 @@ function findHotel(longitude, latitude) {
 		var allocated = budget*0.25;
 		var output = [];
 		for(var i=0; i<data["responseJSON"]["HotelCount"]; i++) {
-			if(parseInt(data["responseJSON"]["HotelInfoList"]["HotelInfo"][i]["FeaturedOffer"]["Price"]["TotalRate"]) <= allocated) {
-				output = [
-					startDate,
-					addMinutes(lastTime, 60) + " to " + addMinutes(lastTime, 90),
-					"Check-in: " + data["responseJSON"]["HotelInfoList"]["HotelInfo"][i]["Name"],
-					parseInt(data["responseJSON"]["HotelInfoList"]["HotelInfo"][i]["FeaturedOffer"]["Price"]["TotalRate"]),
-					data["responseJSON"]["HotelInfoList"]["HotelInfo"][i]["DetailsUrl"]
-				];
-				break;
+			if(parseInt(data["responseJSON"]["HotelInfoList"]["HotelInfo"][i]["StatusCode"]) != 1) {
+				if(parseInt(data["responseJSON"]["HotelInfoList"]["HotelInfo"][i]["FeaturedOffer"]["Price"]["TotalRate"]) <= allocated) {
+					output = [
+						startDate,
+						addMinutes(lastTime, 60) + " to " + addMinutes(lastTime, 90),
+						"Check-in: " + data["responseJSON"]["HotelInfoList"]["HotelInfo"][i]["Name"],
+						parseInt(data["responseJSON"]["HotelInfoList"]["HotelInfo"][i]["FeaturedOffer"]["Price"]["TotalRate"]),
+						data["responseJSON"]["HotelInfoList"]["HotelInfo"][i]["DetailsUrl"]
+					];
+					break;
+				}
 			}
 		}
 		lastTime = addMinutes(lastTime, 90);
