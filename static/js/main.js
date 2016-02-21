@@ -35,7 +35,7 @@ function findFlight() {
   var cityTo = destination.address_components[0].long_name;
   var url = "http://iatacodes.org/api/v4/autocomplete?api_key=1c5694b4-90da-4e17-89b1-12862c708769&query=" + cityTo;
   $.get(url, function(data) {
-    airportTo = data.response.airports_by_cities[0];
+    airportTo = data.response.airports_by_cities[0]["code"];
     console.log(data);
     console.log(airportTo);
     var passInfo = {
