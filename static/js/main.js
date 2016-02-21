@@ -69,6 +69,7 @@ function findFlight() {
 			type: "POST"
     });
     request.complete(function(data) {
+    	console.log(data);
       var departureTime1 = formatDate(data["trips"]["tripOption"][0]["slice"][0]["segment"]["leg"]["departureTime"]);
       var arrivalTime1 = formatDate(data["trips"]["tripOption"][0]["slice"][0]["segment"]["leg"]["arrivalTime"]);
       var startTime = departureTime1 + " to " + arrivalTime1;
