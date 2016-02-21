@@ -189,7 +189,7 @@ function findFoodandEvents(longitude, latitude) {
       time = current.getHours().toString() + ":" + current.getMinutes().toString() + " to " + (current.getHours()+1).toString() + ":" + current.getMinutes().toString();
       var ev = events.pop();
       console.log(ev);
-      addToTable([startString, time, ev.name, "", ev.url]);
+      addToTable([startString, time, ev.name + " (Lunch)", "Unknown", ev.url]);
       lastTime = addMinutes(lastTime, 120);
       current = new Date(parseInt(startDate.substring(6, 10)), parseInt(startDate.substring(0, 2))-1, parseInt(startDate.substring(3, 5)), parseInt(lastTime.substring(0, 2)), parseInt(lastTime.substring(3, 5)));
     }
@@ -198,7 +198,7 @@ function findFoodandEvents(longitude, latitude) {
     if(current.getHours() < 16) {
       time = current.getHours().toString() + ":" + current.getMinutes().toString() + " to " + (current.getHours()+5).toString() + ":" + current.getMinutes().toString();
       ev = events.pop();
-      addToTable([startString, time, ev.name, "", ev.url]);
+      addToTable([startString, time, ev.name + " (Activity)", "Unknown", ev.url]);
       lastTime = addMinutes(lastTime, 360);
       current = new Date(parseInt(startDate.substring(6, 10)), parseInt(startDate.substring(0, 2))-1, parseInt(startDate.substring(3, 5)), parseInt(lastTime.substring(0, 2)), parseInt(lastTime.substring(3, 5)));
     }
@@ -207,7 +207,7 @@ function findFoodandEvents(longitude, latitude) {
     if(current.getHours() < 22) {
       time = current.getHours().toString() + ":" + current.getMinutes().toString() + " to " + (current.getHours()+1).toString() + ":" + current.getMinutes().toString();
       ev = events.pop();
-      addToTable([startString, time, ev.name, "", ev.url]);
+      addToTable([startString, time, ev.name + " (Dinner)", "Unknown", ev.url]);
     }	
     current.setDate(current.getDate() + 1);
 
@@ -220,17 +220,17 @@ function findFoodandEvents(longitude, latitude) {
       console.log(asString(current));
       time = hr.toString() + ":00 to " + (hr+1).toString() + ":00";
       ev = events.pop();
-      addToTable([asString(current), time, ev.name, "", ev.url]);
+      addToTable([asString(current), time, ev.name + " (Lunch)", "Unknown", ev.url]);
 
       //activity (5 hrs)
       time = (hr+2).toString() + ":00 to " + (hr+7).toString() + ":00";
       ev = events.pop();
-      addToTable([asString(current), time, ev.name, "", ev.url]);
+      addToTable([asString(current), time, ev.name + " (Activity)", "Unknown", ev.url]);
 
       //dinner (1 hr)
       time = (hr+8).toString() + ":00 to " + (hr+9).toString() + ":00";
       ev = events.pop();
-      addToTable([asString(current), time, ev.name, "", ev.url]);
+      addToTable([asString(current), time, ev.name + " (Dinner)", "Unknown", ev.url]);
 
       current.setDate(current.getDate() + 1);
     }
