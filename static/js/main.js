@@ -220,17 +220,17 @@ function findFoodandEvents(longitude, latitude) {
       console.log(asString(current));
       time = hr.toString() + ":00 to " + (hr+1).toString() + ":00";
       ev = events.pop();
-      addToTable(asString(current), time, ev.name, "", ev.url);
+      addToTable([asString(current), time, ev.name, "", ev.url]);
 
       //activity (5 hrs)
       time = (hr+2).toString() + ":00 to " + (hr+7).toString() + ":00";
       ev = events.pop();
-      addToTable(asString(current), time, ev.name, "", ev.url);
+      addToTable([asString(current), time, ev.name, "", ev.url]);
 
       //dinner (1 hr)
       time = (hr+8).toString() + ":00 to " + (hr+9).toString() + ":00";
       ev = events.pop();
-      addToTable(asString(current), time, ev.name, "", ev.url);
+      addToTable([asString(current), time, ev.name, "", ev.url]);
 
       current.setDate(current.getDate() + 1);
     }
