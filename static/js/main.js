@@ -78,8 +78,8 @@ function findFlight() {
       var departureTime2 = formatDate(data["responseJSON"]["trips"]["tripOption"][0]["slice"][1]["segment"][0]["leg"][0]["departureTime"]);
       var arrivalTime2 = formatDate(data["responseJSON"]["trips"]["tripOption"][0]["slice"][1]["segment"][0]["leg"][0]["arrivalTime"]);
       var endTime = departureTime2 + " to " + arrivalTime2;
-      var name1 = airportFrom + " to " + airportTo + "(" + data["responseJSON"]["trips"]["tripOption"][0]["slice"][0]["flight"]["carrier"] + data["responseJSON"]["trips"]["tripOption"][0]["slice"][0]["flight"]["number"] + ")";
-      var name2 = airportTo + " to " + airportFrom + "(" + data["responseJSON"]["trips"]["tripOption"][0]["slice"][1]["flight"]["carrier"] + data["responseJSON"]["trips"]["tripOption"][0]["slice"][1]["flight"]["number"] + ")";
+      var name1 = airportFrom + " to " + airportTo + "(" + data["responseJSON"]["trips"]["tripOption"][0]["slice"][0]["segment"][0]["flight"]["carrier"] + data["responseJSON"]["trips"]["tripOption"][0]["slice"][0]["segment"][0]["flight"]["number"] + ")";
+      var name2 = airportTo + " to " + airportFrom + "(" + data["responseJSON"]["trips"]["tripOption"][0]["slice"][1]["segment"][0]["flight"]["carrier"] + data["responseJSON"]["trips"]["tripOption"][0]["slice"][1]["segment"][0]["flight"]["number"] + ")";
       var price = int(data["responseJSON"]["trips"]["tripOption"][0]["pricing"]["saleTotal"].substring(3))/2;
 
       addToTable([startDate, startTime, name1, price, ""]);
