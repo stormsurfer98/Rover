@@ -63,11 +63,11 @@ function findFlight() {
     };
     /*$.post("https://www.googleapis.com/qpxExpress/v1/trips/search?key=AIzaSyBHUfsS5k8fWdr6V_151x2kFKoRgTUx_Io", JSON.stringify(passInfo), function(data) {*/
     var request = $.ajax({
-    	url: "https://www.googleapis.com/qpxExpress/v1/trips/search?key=AIzaSyBHUfsS5k8fWdr6V_151x2kFKoRgTUx_Io",
-    	data: passInfo,
-    	contentType: "application/json",
-    	async: true,
-    	type: "POST"
+	  	url: "https://www.googleapis.com/qpxExpress/v1/trips/search?key=AIzaSyBHUfsS5k8fWdr6V_151x2kFKoRgTUx_Io",
+	  	data: passInfo,
+	  	contentType: "application/json",
+	  	async: true,
+	  	type: "POST"
     });
     request.complete(function(data) {
       var departureTime1 = formatString(data["tripOption"][0]["slice"][0]["segment"]["leg"]["departureTime"]);
@@ -83,7 +83,7 @@ function findFlight() {
 
       addToTable([startDate, startTime, name1, price, ""]);
       addToTable([endDate, endTime, name2, price, ""]);
-    });
+    //});
   });
 }
 
