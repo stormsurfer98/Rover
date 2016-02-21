@@ -5,7 +5,7 @@ var budget = 0;
 function planTrip() {
 	if(document.getElementById("months").value.replace(/^\s+|\s+$/g, '') !== "") months = parseInt(document.getElementById("months").value.replace(/^\s+|\s+$/g, ''));
 	budget = savings*months;
-	if(document.getElementById("percent").value.replace(/^\s+|\s+$/g, '') !== "") budget *= parseFloat(document.getElementById("percent").value.replace(/^\s+|\s+$/g, ''));
+	if(document.getElementById("percent").value.replace(/^\s+|\s+$/g, '') !== "") budget *= parseFloat(document.getElementById("percent").value.replace(/^\s+|\s+$/g, ''))/100;
 	if(document.getElementById("manual").value.replace(/^\s+|\s+$/g, '') !== "") budget = parseInt(document.getElementById("manual").value.replace(/^\s+|\s+$/g, ''));
 	console.log(budget);
 	if(!destination) alert("Nowhere to go!");
