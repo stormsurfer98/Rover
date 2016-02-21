@@ -37,30 +37,30 @@ function findFlight() {
   $.get(url, function(data) {
     airportTo = data.response.airports_by_cities[0];
     var passInfo = {
-      "request": {
-        "slice": [
-          {
-            "origin": airportFrom,
-            "destination": airportTo,
-            "date": startString
-          },
-          {
-            "origin": airportTo,
-            "destination": airportFrom,
-            "date": endString
-          }
-        ],
-        "passengers": {
-          "adultCount": 1,
-          "infantInLapCount": 0,
-          "infantInSeatCount": 0,
-          "childCount": 0,
-          "seniorCount": 0
-        },
-        "solutions": 1,
-        "refundable": false
+  "request": {
+    "slice": [
+      {
+        "origin": "DTW",
+        "destination": "WAS",
+        "date": "2016-02-22"
+      },
+      {
+        "origin": "WAS",
+        "destination": "DTW",
+        "date": "2016-02-23"
       }
-    };
+    ],
+    "passengers": {
+      "adultCount": 1,
+      "infantInLapCount": 0,
+      "infantInSeatCount": 0,
+      "childCount": 0,
+      "seniorCount": 0
+    },
+    "solutions": 1,
+    "refundable": false
+  }
+};
     /*$.post("https://www.googleapis.com/qpxExpress/v1/trips/search?key=AIzaSyBHUfsS5k8fWdr6V_151x2kFKoRgTUx_Io", JSON.stringify(passInfo), function(data) {*/
     var request = $.ajax({
 	  	url: "https://www.googleapis.com/qpxExpress/v1/trips/search?key=AIzaSyBHUfsS5k8fWdr6V_151x2kFKoRgTUx_Io",
@@ -79,10 +79,10 @@ function findFlight() {
       var name1 = airportFrom + " to " + airportTo + "(" + data["tripOption"][0]["slice"][0]["flight"]["carrier"] + data["tripOption"][0]["slice"][0]["flight"]["number"] + ")";
       var name2 = airportTo + " to " + airportFrom + "(" + data["tripOption"][0]["slice"][1]["flight"]["carrier"] + data["tripOption"][0]["slice"][1]["flight"]["number"] + ")";
       var price = int(data["tripOption"][0]["pricing"]["saleTotal"].substring(3))/2;
-    });
 
       addToTable([startDate, startTime, name1, price, ""]);
       addToTable([endDate, endTime, name2, price, ""]);
+    });
     //});
   });
 }
