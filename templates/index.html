@@ -1,7 +1,12 @@
 <!DOCTYPE html>
 <html>
 	<head>
+		<script>
+			var destination;
+		</script>
 		<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBHUfsS5k8fWdr6V_151x2kFKoRgTUx_Io&libraries=places" async defer></script>
+		<script type="text/javascript" src="{{ url_for('static', filename='js/jquery-1.11.3.min.js') }}"></script>
+		<script type="text/javascript" src="{{ url_for('static', filename='js/main.js') }}"></script>
 		<title>Rover: Budget Your Trip, One Step at a Time</title>
 		<!-- META DATA -->
 		<meta http-equiv="content-type" content="text/html;charset=UTF-8">
@@ -56,7 +61,7 @@
 						<!-- START NAVIGATION MENU ITEMS -->
 						<ul>
 							<li><a href="index.html#" data-slide="home" class="active">Home</a></li>
-							<li><a href="index.html#" data-slide="contact">Itinerary</a></li>
+							<li><a href="index.html#" data-slide="itinerary">Itinerary</a></li>
 						</ul>
 						<!-- END NAVIGATION MENU ITEMS -->
 					</div>
@@ -143,15 +148,15 @@
 																			<input type="text" id="autocomplete" name="contact-subject" placeholder="City" class="contact-form-subject required">
 																		</div>
 																		<div class="col-lg-6 col-md-6 col-md-12 animated" data-animation="fadeIn" data-animation-delay="200">
-																			<input type="text" name="start-date" placeholder="Start" class="contact-form-subject required">
+																			<input type="text" name="start-date" id="start-date" placeholder="Start" class="contact-form-subject required">
 																		</div>
 																		<div class="col-lg-6 col-md-6 col-md-12 animated" data-animation="fadeIn" data-animation-delay="200">
-																			<input type="text" name="end-date" placeholder="End" class="contact-form-subject required">
+																			<input type="text" name="end-date" id="end-date" placeholder="End" class="contact-form-subject required">
 																		</div>
 																	</div>
 																</form>
 																<center>
-																	<a href="index.html#" class="btn btn-inverse go-slide animated" data-animation="fadeIn" data-animation-delay="60" data-slide="subscribe">Plan Trip <span><i class="fa fa-plane"></i></span></a>
+																	<a href="index.html#" class="btn btn-inverse go-slide animated" data-animation="fadeIn" data-animation-delay="60" data-slide="itinerary" onclick="planTrip()">Plan Trip <span><i class="fa fa-plane"></i></span></a>
 																</center>
 															</div>
 														</div>
@@ -163,8 +168,8 @@
 									</div>
 									<!-- END CONTAINER -->
 								</div>
-								<!-- CONTACT SECTION -->
-								<div class="slide-item" data-slide-id="contact">
+								<!-- ITINERARY SECTION -->
+								<div class="slide-item" data-slide-id="itinerary">
 									<!-- START CONTAINER -->
 									<div class="container-fluid">
 										<div class="row">
@@ -193,7 +198,7 @@
 																					<th class="text-left">Options</th>
 																				</tr>
 																			</thead>
-																			<tbody class="table-hover">
+																			<tbody class="table-hover" id="rows">
 																				<tr>
 																					<td class="text-left">N/A</td>
 																					<td class="text-left">N/A</td>
@@ -232,7 +237,6 @@
 			</footer>
 		</div>
 		<!-- JS -->
-		<script type="text/javascript" src="{{ url_for('static', filename='js/jquery-1.11.3.min.js') }}"></script>
 		<script type="text/javascript" src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
 		<script type="text/javascript" src="{{ url_for('static', filename='js/vendor.js') }}"></script>
 		<script type="text/javascript" src="{{ url_for('static', filename='js/options-v=2.js') }}"></script>

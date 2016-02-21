@@ -473,24 +473,22 @@
 
   ///** FUNCTIONS **/
 
-  var destination;
   function autocompletePlaces() {
-    // Places autcomplete data in text field
+    //Places autcomplete data in text field
     var placeSearch, autocomplete;
     var componentForm = {
       administrative_area_level_3: 'long_name',
       administrative_area_level_1: 'short_name',
       country: 'short_name'
     };
-
     autocomplete = new google.maps.places.Autocomplete(document.getElementById('autocomplete'), {types: ['geocode']});
     autocomplete.addListener('place_changed', function() {
       var place = autocomplete.getPlace();
       destination = place;
       var address = '';
-      for (var i = 0; i < place.address_components.length; i++) {
+      for(var i = 0; i < place.address_components.length; i++) {
         var addressType = place.address_components[i].types[0];
-        if (componentForm[addressType]) {
+        if(componentForm[addressType]) {
           var val = place.address_components[i][componentForm[addressType]];
           address.concat(", " + val);
         }
@@ -498,49 +496,7 @@
       if (address) document.getElementById('autocomplete').value = address;
     });
   }
-  function findFlight() {
-    if (!destination) throw "Nowhere to go!";
-    var airportFrom = "DTW"; // Always starting from Detroit
-    var airportTo = destination.address_components[0].long_name;
-    var startdate = $("input[name=start-date]").value.trim();
-    var enddate = $("input[name=end-date]").value.trim();
-    startDate = startDate.substring(6, 10) + "-" + startDate.substring(0, 2) + "-" + startDate.substring(3, 5);
-    endDate = endDate.substring(6, 10) + "-" + endDate.substring(0, 2) + "-" + endDate.substring(3, 5);
-    req = "http://iatacodes.org/api/v4/autocomplete?api_key=1c5694b4-90da-4e17-89b1-12862c708769&query=" + airportTo;
-    res = $.get(req, function(data) {
-      airportCode = data.response.airports_by_cities[0];
-      var passInfo = {
-        "request": {
-          "slice": [
-            {
-              "origin": airportFrom,
-              "destination": airportTo,
-              "date": startDate
-            },
-            {
-              "origin": airportTo,
-              "destination": airportFrom,
-              "date": endDate
-            }
-          ],
-          "passengers": {
-            "adultCount": 1,
-            "infantInLapCount": 0,
-            "infantInSeatCount": 0,
-            "childCount": 0,
-            "seniorCount": 0
-          },
-          "solutions": 1,
-          "refundable": false
-        }
-      };
-      $.post("https://www.googleapis.com/qpxExpress/v1/trips/search?api_key=1c5694b4-90da-4e17-89b1-12862c708769", passInfo, function(data) {
-        var date = data["tripOption"][0]["slice"]
-        var arr = [];
-        date, time, name, price, link
-      });
-    });
-  }
+
 
   ///** DOCUMENT READY **/
 
