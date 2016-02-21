@@ -3,10 +3,8 @@ var months = 6;
 var budget = 0;
 
 function planTrip() {
-	if(document.getElementById("months").value.replace(/^\s+|\s+$/g, '') !== "") months = parseInt(document.getElementById("months").value.replace(/^\s+|\s+$/g, ''));
 	budget = savings*months;
-	if(document.getElementById("percent").value.replace(/^\s+|\s+$/g, '') !== "") budget *= parseFloat(document.getElementById("percent").value.replace(/^\s+|\s+$/g, ''))/100;
-	if(document.getElementById("manual").value.replace(/^\s+|\s+$/g, '') !== "") budget = parseInt(document.getElementById("manual").value.replace(/^\s+|\s+$/g, ''));
+	console.log(budget);
 	if(!destination) alert("Nowhere to go!");
 	else if(!document.getElementById("start-date").value.replace(/^\s+|\s+$/g, '').match(/(\d{2}\/){2}\d{4}/)) alert("Provide a valid start date!");
 	else if(!document.getElementById("end-date").value.replace(/^\s+|\s+$/g, '').match(/(\d{2}\/){2}\d{4}/)) alert("Provide a valid end date!");
@@ -18,10 +16,6 @@ function planTrip() {
 		document.getElementById("rows").innerHTML = "";
 		findFlight();
 	}
-}
-
-function removeRow(element) {
-	element.parentElement.parentElement.innerHTML = "";
 }
 
 function addMinutes(time, minutes) {
@@ -57,7 +51,7 @@ function addToTable(data) {
 	str += "<td class='text-left'>" + data[1] + "</td>";
 	str += "<td class='text-left'><a href=\"" + data[4] + "\">" + data[2] + "</a></td>";
 	str += "<td class='text-left'>" + data[3] + "</td>";
-	str += "<td class='text-left'><a href='#' class='btn btn' onclick='removeRow(this)'>Remove</a></td></tr>";
+	str += "<td class='text-left'><a href='#' class='btn btn'>Remove</a></td></tr>";
 	document.getElementById("rows").innerHTML += str;
 }
 
@@ -160,5 +154,25 @@ function findHotel(longitude, latitude) {
 }
 
 function findFoodandEvents(longitude, latitude) {
-	
+  /*
+  var findVenues = "https://api.foursquare.com/v2/venues/search?ll=" + latitude + "," + longitude + "&client_id=KFSYUBEFSIF4BWHQN4WKWRX1MGGWQWO12BF5AZ0T12AGK1AL&client_secret=HSCRFAHT3DLO1SREGJ2HRP5OPQIN53IS5P4L0FL5432YICQO&v=20160221"
+  var request = $.ajax({
+    url: findVenues,
+    async: true,
+    type: "GET"
+  });
+
+  request.complete(function(data) {
+    var listOfVenues = data.response.venues;
+    var restaurants = [];
+    var events = [];
+    for (var i = 0; i < listOfVenues.length; i++) {
+      if ((listOfVenues[i].categories[0].name).indexOf("Restaurant") > -1) {
+        restaurants.push(listOfVenues[i];
+      } else {
+        events.push(listOfVenues[i]);
+      }
+    }
+  });
+  */
 }
