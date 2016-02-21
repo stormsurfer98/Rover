@@ -1,6 +1,6 @@
-var startDate, endDate, startString, endString;
+var startDate, endDate, startString, endString, lastTime, leaveTime;
 var months = 6;
-var budget = savings;
+var budget = 5000//savings*months;
 
 function planTrip() {
 	if(!destination) alert("Nowhere to go!");
@@ -14,6 +14,24 @@ function planTrip() {
 		document.getElementById("rows").innerHTML = "";
 		findFlight();
 	}
+}
+
+function addMinutes(time, minutes) {
+	dayMinutes = parseInt(time.substring(0, 2))*60 + parseInt(time.substring(3, 5)) + minutes;
+	hour = parseInt(dayMinutes/60);
+	if(hour < 10) hour = "0" + hour;
+	min = parseInt(dayMinutes%60);
+	if(min < 10) min = "0" + min;
+	return(hour + ":" + min);
+}
+
+function subtractMinutes(time, minutes) {
+	dayMinutes = parseInt(time.substring(0, 2))*60 + parseInt(time.substring(3, 5)) - minutes;
+	hour = parseInt(dayMinutes/60);
+	if(hour < 10) hour = "0" + hour;
+	min = parseInt(dayMinutes%60);
+	if(min < 10) min = "0" + min;
+	return(hour + ":" + min);
 }
 
 function formatDate(dateString) {
@@ -35,6 +53,8 @@ function findFlight() {
 	var cityTo = destination.address_components[0].long_name;
 	var url = "http://iatacodes.org/api/v4/autocomplete?api_key=1c5694b4-90da-4e17-89b1-12862c708769&query=" + cityTo;
 	$.get(url, function(data) {
+		longitude = data.response.airports_by_cities[0]["lng"];
+		latitude = data.response.airports_by_cities[0]["lat"];
 		airportTo = data.response.airports_by_cities[0]["code"];
 		var passInfo = {
 			"request": {
@@ -72,25 +92,52 @@ function findFlight() {
 			var departureTime1 = formatDate(data["responseJSON"]["trips"]["tripOption"][0]["slice"][0]["segment"][0]["leg"][0]["departureTime"]);
 			var arrivalTime1 = formatDate(data["responseJSON"]["trips"]["tripOption"][0]["slice"][0]["segment"][0]["leg"][0]["arrivalTime"]);
 			var startTime = departureTime1 + " to " + arrivalTime1;
+			lastTime = arrivalTime1;
 			var departureTime2 = formatDate(data["responseJSON"]["trips"]["tripOption"][0]["slice"][1]["segment"][0]["leg"][0]["departureTime"]);
 			var arrivalTime2 = formatDate(data["responseJSON"]["trips"]["tripOption"][0]["slice"][1]["segment"][0]["leg"][0]["arrivalTime"]);
 			var endTime = departureTime2 + " to " + arrivalTime2;
+			leaveTime = departureTime2;
 			var name1 = airportFrom + " to " + airportTo + " (" + data["responseJSON"]["trips"]["tripOption"][0]["slice"][0]["segment"][0]["flight"]["carrier"] + data["responseJSON"]["trips"]["tripOption"][0]["slice"][0]["segment"][0]["flight"]["number"] + ")";
 			var name2 = airportTo + " to " + airportFrom + " (" + data["responseJSON"]["trips"]["tripOption"][0]["slice"][1]["segment"][0]["flight"]["carrier"] + data["responseJSON"]["trips"]["tripOption"][0]["slice"][1]["segment"][0]["flight"]["number"] + ")";
 			var price = parseInt(data["responseJSON"]["trips"]["tripOption"][0]["pricing"][0]["saleTotal"].substring(3))/2;
 
+			budget = budget - 2*price;
 			addToTable([startDate, startTime, name1, price, ""]);
+			findHotel(longitude, latitude);
 			addToTable([endDate, endTime, name2, price, ""]);
 		});
 	});
 }
 
 function findHotel(longitude, latitude) {
-	var url = "http://terminal2.expedia.com:80/x/hotels?maxhotels=500&location="+latitude+"%2C"+longitude+"&radius=10km&checkInDate="+startString+"&checkOutDate="+endString+"&adults=1&sort=starrating&order=desc&exclude=description%2Caddress%2Cthumbnailurl%2Camenitylist%2Cgeolocation";
-	$.get(url, function(data) {
+	var request = $.ajax({
+		headers: {'Authorization': 'expedia-apikey key=7FAbOxAd03MKVCTusLDiGQ9irDkzX6F9'},
+		url: "http://terminal2.expedia.com:80/x/hotels?maxhotels=500&location="+latitude+"%2C"+longitude+"&radius=10km&checkInDate="+startString+"&checkOutDate="+endString+"&adults=1&sort=starrating&order=desc&exclude=description%2Caddress%2Cthumbnailurl%2Camenitylist%2Cgeolocation",
+		async: true,
+		type: "GET"
+	});
+	request.complete(function(data) {
+		var allocated = budget*.25;
 		var output = [];
 		for(var i=0; i<data["HotelCount"]; i++) {
-			//
+			if(parseInt(data["HotelInfoList"]["HotelInfo"][i]["FeaturedOffer"]["Price"]["TotalRate"]) <= allocated) {
+				output = [
+					startDate,
+					addMinutes(lastTime, 60) + " to " + addMinutes(lastTime, 90),
+					"Check-in: " + data["HotelInfoList"]["HotelInfo"][i]["Name"],
+					parseInt(data["HotelInfoList"]["HotelInfo"][i]["FeaturedOffer"]["Price"]["TotalRate"]),
+					data["HotelInfoList"]["HotelInfo"][i]["DetailsUrl"]
+				]
+				break;
+			}
 		}
-	});
+		lastTime = addMinutes(lastTime, 90);
+		addToTable(output);
+		//do stuff
+		output[0] = endDate;
+		output[1] = subtractMinutes(leaveTime, 90) + " to " + subtractMinutes(leaveTime, 60);
+		output[2] = output[2].replace("Check-in", "Check-out");
+		output[3] = 0;
+		addToTable(output);
+	}
 }
