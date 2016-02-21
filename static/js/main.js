@@ -17,7 +17,7 @@ function planTrip() {
 }
 
 function formatDate(dateString) {
-	return(departureTime1.substring(departureTime1.indexOf("T"), departureTime1.lastIndexOf("-")));
+	return(dateString.substring(dateString.indexOf("T"), dateString.lastIndexOf("-")));
 }
 
 function addToTable(data) {
