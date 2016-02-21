@@ -22,11 +22,11 @@ function formatDate(dateString) {
 
 function addToTable(data) {
 	var str = "";
-	str += "<tr><td>" + data[0] + "</td>";
-	str += "<td>" + data[1] + "</td>";
-	str += "<td><a href=\"" + data[4] + "\">" + data[2] + "</a></td>";
-	str += "<td>" + data[3] + "</td>";
-	str += '<td class="text-left"><a href="#" class="btn btn go-slide animated" data-animation="fadeIn" data-animation-delay="60" data-slide="subscribe">Remove</a></td></tr>';
+	str += "<tr><td class='text-left'>" + data[0] + "</td>";
+	str += "<td class='text-left'>" + data[1] + "</td>";
+	str += "<td class='text-left'><a href=\"" + data[4] + "\">" + data[2] + "</a></td>";
+	str += "<td class='text-left'>" + data[3] + "</td>";
+	str += "<td class='text-left'><a href='#' class='btn btn go-slide animated' data-animation='fadeIn' data-animation-delay='60'>Remove</a></td></tr>";
 	document.getElementById("rows").innerHTML += str;
 }
 
@@ -75,8 +75,8 @@ function findFlight() {
 			var departureTime2 = formatDate(data["responseJSON"]["trips"]["tripOption"][0]["slice"][1]["segment"][0]["leg"][0]["departureTime"]);
 			var arrivalTime2 = formatDate(data["responseJSON"]["trips"]["tripOption"][0]["slice"][1]["segment"][0]["leg"][0]["arrivalTime"]);
 			var endTime = departureTime2 + " to " + arrivalTime2;
-			var name1 = airportFrom + " to " + airportTo + "(" + data["responseJSON"]["trips"]["tripOption"][0]["slice"][0]["segment"][0]["flight"]["carrier"] + data["responseJSON"]["trips"]["tripOption"][0]["slice"][0]["segment"][0]["flight"]["number"] + ")";
-			var name2 = airportTo + " to " + airportFrom + "(" + data["responseJSON"]["trips"]["tripOption"][0]["slice"][1]["segment"][0]["flight"]["carrier"] + data["responseJSON"]["trips"]["tripOption"][0]["slice"][1]["segment"][0]["flight"]["number"] + ")";
+			var name1 = airportFrom + " to " + airportTo + " (" + data["responseJSON"]["trips"]["tripOption"][0]["slice"][0]["segment"][0]["flight"]["carrier"] + data["responseJSON"]["trips"]["tripOption"][0]["slice"][0]["segment"][0]["flight"]["number"] + ")";
+			var name2 = airportTo + " to " + airportFrom + " (" + data["responseJSON"]["trips"]["tripOption"][0]["slice"][1]["segment"][0]["flight"]["carrier"] + data["responseJSON"]["trips"]["tripOption"][0]["slice"][1]["segment"][0]["flight"]["number"] + ")";
 			var price = parseInt(data["responseJSON"]["trips"]["tripOption"][0]["pricing"][0]["saleTotal"].substring(3))/2;
 
 			addToTable([startDate, startTime, name1, price, ""]);
