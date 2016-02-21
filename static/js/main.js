@@ -17,6 +17,7 @@ function planTrip() {
 }
 
 function formatDate(dateString) {
+	console.log(dateString);
 	return(dateString.substring(dateString.indexOf("T"), dateString.lastIndexOf("-")));
 }
 
