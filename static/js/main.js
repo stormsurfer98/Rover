@@ -34,6 +34,11 @@ function subtractMinutes(time, minutes) {
 	return(hour + ":" + min);
 }
 
+function daysBetween(firstDate, secondDate) {
+	var oneDay = 24*60*60*1000;
+	return(Math.round(Math.abs((firstDate.getTime() - secondDate.getTime())/(oneDay))));
+}
+
 function formatDate(dateString) {
 	return(dateString.substring(dateString.indexOf("T")+1, dateString.lastIndexOf("-")));
 }
@@ -119,14 +124,15 @@ function findHotel(longitude, latitude) {
 	request.complete(function(data) {
 		var allocated = budget*0.25;
 		var output = [];
+		var days = daysBetween(startString, endString);
 		for(var i=0; i<data["responseJSON"]["HotelCount"]; i++) {
 			if(parseInt(data["responseJSON"]["HotelInfoList"]["HotelInfo"][i]["StatusCode"]) != 1) {
-				if(parseInt(data["responseJSON"]["HotelInfoList"]["HotelInfo"][i]["Price"]["TotalRate"]["Value"]) <= allocated) {
+				if(parseInt(data["responseJSON"]["HotelInfoList"]["HotelInfo"][i]["Price"]["TotalRate"]["Value"])*days <= allocated) {
 					output = [
 						startDate,
 						addMinutes(lastTime, 60) + " to " + addMinutes(lastTime, 90),
 						"Check-in: " + data["responseJSON"]["HotelInfoList"]["HotelInfo"][i]["Name"],
-						parseInt(data["responseJSON"]["HotelInfoList"]["HotelInfo"][i]["Price"]["TotalRate"]["Value"]),
+						parseInt(data["responseJSON"]["HotelInfoList"]["HotelInfo"][i]["Price"]["TotalRate"]["Value"])*days,
 						data["responseJSON"]["HotelInfoList"]["HotelInfo"][i]["DetailsUrl"]
 					];
 					break;
