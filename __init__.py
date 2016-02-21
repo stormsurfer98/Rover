@@ -1,46 +1,41 @@
-from flask import Flask, render_template
-from flask_restful import Resource, Api
+from flask import Flask, render_template, jsonify, url_for
 
 app = Flask(__name__)
-api = Api(app)
 
 @app.route("/")
 @app.route("/index")
 def hello():
     return render_template("index.html")
 
-class Purchases(Resource):
-    def get(self, my_id):
-        purchases = []
-        lines = open("/static/data/purchases.txt", "r").readlines()
+@app.route("/purchases/<my_id>")
+def purchases(my_id):
+    lst = []
+    with app.open_resource('static/data/purchases.txt') as f:
+        lines = f.readlines()
         for i in range(len(lines)):
             lines[i] = lines[i].split("\t")
-            purchases.append({
-                    user_id: my_id,
-                    date: lines[i][0],
-                    company: lines[i][1],
-                    category: lines[i][2],
-                    amount: int(lines[i][3])
+            lst.append({
+                    "user_id": my_id,
+                    "date": lines[i][0],
+                    "company": lines[i][1],
+                    "category": lines[i][2],
+                    "amount": int(lines[i][3])
                 })
+        return jsonify(user_purchases=lst)
 
-        return jsonify({ user_purchases: purchases })
-
-class Deposits(Resource):
-    def get(self, my_id):
-        deposits = []
-        lines = open("/static/data/deposits.txt", "r").readlines()
+@app.route("/deposits/<my_id>")
+def deposits(my_id):
+    lst = []
+    with app.open_resource('static/data/deposits.txt') as f:
+        lines = f.readlines()
         for i in range(len(lines)):
             lines[i] = lines[i].split("\t")
-            purchases.append({
-                    user_id: my_id,
-                    date: lines[i][0],
-                    amount: int(lines[i][1])
+            lst.append({
+                    "user_id": my_id,
+                    "date": lines[i][0],
+                    "amount": int(lines[i][1]),
                 })
-
-        return jsonify({ user_deposits: deposits })
-
-api.add_resource(Purchases, "/purchases/<string:my_id>")
-api.add_resource(Deposits, "/deposits/<string:my_id>")
+        return jsonify(user_deposits=lst)
 
 if __name__ == "__main__":
-    app.run()
+    app.run(debug=True)
