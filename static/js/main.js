@@ -26,7 +26,7 @@ function addToTable(data) {
 	str += "<td class='text-left'>" + data[1] + "</td>";
 	str += "<td class='text-left'><a href=\"" + data[4] + "\">" + data[2] + "</a></td>";
 	str += "<td class='text-left'>" + data[3] + "</td>";
-	str += "<td class='text-left'><a href='#' class='btn btn go-slide animated' data-animation='fadeIn' data-animation-delay='60'>Remove</a></td></tr>";
+	str += "<td class='text-left'><a href='#' class='btn btn'>Remove</a></td></tr>";
 	document.getElementById("rows").innerHTML += str;
 }
 
