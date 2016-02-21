@@ -3,7 +3,10 @@ var months = 6;
 var budget = 0;
 
 function planTrip() {
+	if(document.getElementById("months").value.replace(/^\s+|\s+$/g, '') !== "") months = parseInt(document.getElementById("months").value.replace(/^\s+|\s+$/g, ''));
 	budget = savings*months;
+	if(document.getElementById("percent").value.replace(/^\s+|\s+$/g, '') !== "") budget *= parseFloat(document.getElementById("percent").value.replace(/^\s+|\s+$/g, ''));
+	if(document.getElementById("manual").value.replace(/^\s+|\s+$/g, '') !== "") budget = parseInt(document.getElementById("manual").value.replace(/^\s+|\s+$/g, ''));
 	console.log(budget);
 	if(!destination) alert("Nowhere to go!");
 	else if(!document.getElementById("start-date").value.replace(/^\s+|\s+$/g, '').match(/(\d{2}\/){2}\d{4}/)) alert("Provide a valid start date!");

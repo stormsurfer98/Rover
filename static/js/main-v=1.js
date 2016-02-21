@@ -509,7 +509,6 @@
         }
         savings -= purchases[i].amount;
       }
-      console.log(moneyFor);
       var data = [];
       for (var key in moneyFor) {
         data.push({
