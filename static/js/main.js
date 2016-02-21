@@ -177,25 +177,18 @@ function findFoodandEvents(longitude, latitude) {
   request.complete(function(data) {
     console.log(data);
     var listOfVenues = data.responseJSON.response.venues;
-    var restaurants = [];
     var events = [];
     for(var i=0; i<listOfVenues.length; i++) {
-      if((listOfVenues[i].categories[0].name).indexOf("Restaurant") > -1) {
-        restaurants.push(listOfVenues[i]);
-      } else {
         events.push(listOfVenues[i]);
-      }
     }
-    console.log(restaurants);
-    console.log(events);
-
+    
     //first day
     //lunch (1 hr)
     lastTime = addMinutes(lastTime, 60);
     var current = new Date(parseInt(startDate.substring(6, 10)), parseInt(startDate.substring(0, 2))-1, parseInt(startDate.substring(3, 5)), parseInt(lastTime.substring(0, 2)), parseInt(lastTime.substring(3, 5)));
     if(current.getHours() < 14) {
       time = current.getHours().toString() + ":" + current.getMinutes().toString() + " to " + (current.getHours()+1).toString() + ":" + current.getMinutes().toString();
-      var ev = restaurants.pop();
+      var ev = events.pop();
       console.log(ev);
       addToTable([startString, time, ev.name, "", ev.url]);
       lastTime = addMinutes(lastTime, 120);
@@ -214,7 +207,7 @@ function findFoodandEvents(longitude, latitude) {
     //dinner (1 hr)
     if(current.getHours() < 22) {
       time = current.getHours().toString() + ":" + current.getMinutes().toString() + " to " + (current.getHours()+1).toString() + ":" + current.getMinutes().toString();
-      ev = restaurants.pop();
+      ev = events.pop();
       addToTable([startString, time, ev.name, "", ev.url]);
     }	
     current.setDate(current.getDate() + 1);
@@ -226,7 +219,7 @@ function findFoodandEvents(longitude, latitude) {
 
       //lunch (1 hr)
       time = hr.toString() + ":00 to " + (hr+1).toString() + ":00";
-      ev = restaurants.pop();
+      ev = events.pop();
       addToTable(asString(current), time, ev.name, "", ev.url);
 
       //activity (5 hrs)
@@ -236,7 +229,7 @@ function findFoodandEvents(longitude, latitude) {
 
       //dinner (1 hr)
       time = (hr+8).toString() + ":00 to " + (hr+9).toString() + ":00";
-      ev = restaurants.pop();
+      ev = events.pop();
       addToTable(asString(current), time, ev.name, "", ev.url);
 
       current.setDate(current.getDate() + 1);
