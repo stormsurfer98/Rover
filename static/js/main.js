@@ -70,15 +70,15 @@ function findFlight() {
     });
     request.complete(function(data) {
     	console.log(data);
-      var departureTime1 = formatDate(data["trips"]["tripOption"][0]["slice"][0]["segment"]["leg"]["departureTime"]);
-      var arrivalTime1 = formatDate(data["trips"]["tripOption"][0]["slice"][0]["segment"]["leg"]["arrivalTime"]);
+      var departureTime1 = formatDate(data["responseJSON"]["trips"]["tripOption"][0]["slice"][0]["segment"]["leg"]["departureTime"]);
+      var arrivalTime1 = formatDate(data["responseJSON"]["trips"]["tripOption"][0]["slice"][0]["segment"]["leg"]["arrivalTime"]);
       var startTime = departureTime1 + " to " + arrivalTime1;
-      var departureTime2 = formatDate(data["trips"]["tripOption"][0]["slice"][1]["segment"]["leg"]["departureTime"]);
-      var arrivalTime2 = formatDate(data["trips"]["tripOption"][0]["slice"][1]["segment"]["leg"]["arrivalTime"]);
+      var departureTime2 = formatDate(data["responseJSON"]["trips"]["tripOption"][0]["slice"][1]["segment"]["leg"]["departureTime"]);
+      var arrivalTime2 = formatDate(data["responseJSON"]["trips"]["tripOption"][0]["slice"][1]["segment"]["leg"]["arrivalTime"]);
       var endTime = departureTime2 + " to " + arrivalTime2;
-      var name1 = airportFrom + " to " + airportTo + "(" + data["trips"]["tripOption"][0]["slice"][0]["flight"]["carrier"] + data["trips"]["tripOption"][0]["slice"][0]["flight"]["number"] + ")";
-      var name2 = airportTo + " to " + airportFrom + "(" + data["trips"]["tripOption"][0]["slice"][1]["flight"]["carrier"] + data["trips"]["tripOption"][0]["slice"][1]["flight"]["number"] + ")";
-      var price = int(data["trips"]["tripOption"][0]["pricing"]["saleTotal"].substring(3))/2;
+      var name1 = airportFrom + " to " + airportTo + "(" + data["responseJSON"]["trips"]["tripOption"][0]["slice"][0]["flight"]["carrier"] + data["responseJSON"]["trips"]["tripOption"][0]["slice"][0]["flight"]["number"] + ")";
+      var name2 = airportTo + " to " + airportFrom + "(" + data["responseJSON"]["trips"]["tripOption"][0]["slice"][1]["flight"]["carrier"] + data["responseJSON"]["trips"]["tripOption"][0]["slice"][1]["flight"]["number"] + ")";
+      var price = int(data["responseJSON"]["trips"]["tripOption"][0]["pricing"]["saleTotal"].substring(3))/2;
 
       addToTable([startDate, startTime, name1, price, ""]);
       addToTable([endDate, endTime, name2, price, ""]);
