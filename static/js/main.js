@@ -118,7 +118,7 @@ function findHotel(longitude, latitude) {
 	var request = $.ajax({
 		headers: {'Authorization': 'expedia-apikey key=7FAbOxAd03MKVCTusLDiGQ9irDkzX6F9'},
 		url: "http://terminal2.expedia.com:80/x/hotels?maxhotels=500&location="+latitude+"%2C"+longitude+"&radius=10km&checkInDate="+startString+"&checkOutDate="+endString+"&adults=1&sort=starrating&order=desc&exclude=description%2Caddress%2Cthumbnailurl%2Camenitylist%2Cgeolocation",
-		async: true,
+		async: false,
 		type: "GET"
 	});
 	request.complete(function(data) {
