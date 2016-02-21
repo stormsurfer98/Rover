@@ -21,7 +21,7 @@ function planTrip() {
 }
 
 function removeRow(element) {
-	element.parentElement.innerHTML = "";
+	element.parentElement.parentElement.innerHTML = "";
 }
 
 function addMinutes(time, minutes) {
