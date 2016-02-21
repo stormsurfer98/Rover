@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBHUfsS5k8fWdr6V_151x2kFKoRgTUx_Io&libraries=places" async defer></script>
+		<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBHUfsS5k8fWdr6V_151x2kFKoRgTUx_Io&libraries=places" async defer></script>
 		<title>Rover: Budget Your Trip, One Step at a Time</title>
 		<!-- META DATA -->
 		<meta http-equiv="content-type" content="text/html;charset=UTF-8">
@@ -32,7 +32,7 @@
 		<div id="awd-site-wrap" class="bg bg-home">
 			<div id="bg">
 				<div id="overlay">
-          <div class="awd-site-bg bg-home"></div>
+					<div class="awd-site-bg bg-home"></div>
 					<div class="awd-site-bg bg-subscribe"></div>
 					<div class="awd-site-bg bg-about"></div>
 					<div class="awd-site-bg bg-contact"></div>
@@ -86,9 +86,9 @@
 																<h2 class="section-title text-default animated" data-animation="fadeIn" data-animation-delay="50" style="margin-bottom: 20px">
 																	Budget
 																</h2>
-                                <p class="animated" data-animation="fadeIn" data-animation-delay="100">
-                                    <strong>Step 1. </strong>We've analyzed your budget!
-                                </p>
+																<p class="animated" data-animation="fadeIn" data-animation-delay="100">
+																	<strong>Step 1. </strong>We've analyzed your budget!
+																</p>
 																<div class="row">
 																	<div class="col-lg-12 col-md-6 col-md-12 animated" data-animation="fadeIn" data-animation-delay="200">
 																		<div style="border: 2px solid black">
@@ -134,9 +134,9 @@
 																	Destination
 																</h2>
 																<!-- END TITLE -->
-                                <p class="animated" data-animation="fadeIn" data-animation-delay="100">
-                                    <strong>Step 2. </strong>Have a destination in mind? We'll plan the trip for you!
-                                </p>
+																<p class="animated" data-animation="fadeIn" data-animation-delay="100">
+																	<strong>Step 2. </strong>Have a destination in mind? We'll plan the trip for you!
+																</p>
 																<form id="contact-form" class="contact-form">
 																	<div class="row">
 																		<div class="col-md-12 animated" data-animation="fadeIn" data-animation-delay="200">
@@ -172,52 +172,40 @@
 												<!-- START SLIDE CONTENT-->
 												<div class="slide-content">
 													<div class="row">
-														<div class="col-lg-5 col-lg-offset-1 col-md-6 col-md-push-6 svm">
-															<div class="section-info text-right">
-																<!-- START TITLE -->
-																<h2 class="section-title text-default animated" data-animation="fadeIn">Contact Us</h2>
-																<!-- END TITLE -->
-																<div class="contact-info">
-																	<p class="contact-item"><i class="fa fa-phone"></i> Phone: (+1) 23-4567-890</p>
-																	<!--<p class="contact-item"><i class="fa fa-envelope"></i> Email: info@example.com</p>-->
-																	<p class="contact-item"><i class="fa fa-map-marker"></i> NE 29th Ave, Miami, FL 33180, USA</p>
-																</div>
-																<p class="animated" data-animation="fadeIn" data-animation-delay="100">
-																	<strong>Wanna say hello?</strong> Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod <strong>tempor incididunt</strong> ut labore et dolore magna aliqua.
-																</p>
-															</div>
-														</div>
-														<div class="col-lg-6 col-md-6 col-md-pull-6 svm">
+														<div class="col-lg-12 col-md-12 svm">
 															<div class="section-info text-left">
-																<!-- START CONTACT FORM -->
-																<form id="contact-form" class="contact-form">
-																	<div class="row">
-																		<div class="col-lg-4 col-md-6 col-md-12 animated" data-animation="fadeIn" data-animation-delay="200">
-																			<input type="text" name="contact-name" placeholder="Name"
-																				class="contact-form-name required">
-																		</div>
-																		<div class="col-lg-4 col-md-6 col-md-12 animated" data-animation="fadeIn" data-animation-delay="200">
-																			<input type="email" name="contact-email" placeholder="Email address"
-																				class="contact-form-email required">
-																		</div>
-																		<div class="col-lg-4 col-md-12 animated" data-animation="fadeIn" data-animation-delay="200">
-																			<input type="text" name="contact-subject" placeholder="Subject"
-																				class="contact-form-subject required">
-																		</div>
-																		<!-- END COLUMN 4 -->
-																		<div class="col-md-12 animated" data-animation="fadeIn" data-animation-delay="150">
-																			<textarea name="contact-message" placeholder="Message"
-																				class="contact-form-message required"
-																				rows="4"></textarea>
-																			<button class="btn btn-block" type="submit" id="submit" name="submit"><span>Send Message</span>
-																			<i class="fa fa-send"></i></button>
-																		</div>
-																		<!-- END COLUMN 8 -->
+																<!-- START TITLE -->
+																<h2 class="section-title text-default animated" data-animation="fadeIn" style="display: inline">Itinerary<a href="javascript: print()"><i class="fa fa-print" style="margin-left: 15px"></i></a>&nbsp;&nbsp;<a href="#"><i class="fa fa-save"></i></a></h2> 
+																<!-- END TITLE -->
+																<p class="animated" data-animation="fadeIn" data-animation-delay="100" style="margin-top: 10px">
+																	<strong>Ready to go?</strong> Print or export your itinerary to Google Calendar. View your itinerary below!
+																</p>
+																<!-- START TABLE -->
+																<div id="table-wrapper">
+																	<div id="table-scroll">
+																		<table class="table-fill" width="100%" overflow="scroll">
+																			<thead>
+																				<tr>
+																					<th class="text-left">Date</th>
+																					<th class="text-left">Time</th>
+																					<th class="text-left">Event</th>
+																					<th class="text-left">Estimated Cost</th>
+																					<th class="text-left">Options</th>
+																				</tr>
+																			</thead>
+																			<tbody class="table-hover">
+																				<tr>
+																					<td class="text-left">N/A</td>
+																					<td class="text-left">N/A</td>
+																					<td class="text-left">N/A</td>
+																					<td class="text-left">N/A</td>
+																					<td class="text-left"><a href="#" class="btn btn go-slide animated" data-animation="fadeIn" data-animation-delay="60" data-slide="subscribe">Remove</a></td>
+																				</tr>
+																			</tbody>
+																		</table>
 																	</div>
-																	<!-- END ROW -->
-																	<div class="contact-notice"></div>
-																</form>
-																<!-- END CONTACT FORM -->
+																</div>
+																<!-- END TABLE -->
 															</div>
 														</div>
 													</div>
