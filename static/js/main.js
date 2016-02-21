@@ -1,9 +1,10 @@
 var startDate, endDate, startString, endString, lastTime, leaveTime;
 var months = 6;
-var budget = savings*months;
-console.log(budget);
+var budget = 0;
 
 function planTrip() {
+	budget = savings*months;
+	console.log(budget);
 	if(!destination) alert("Nowhere to go!");
 	else if(!document.getElementById("start-date").value.replace(/^\s+|\s+$/g, '').match(/(\d{2}\/){2}\d{4}/)) alert("Provide a valid start date!");
 	else if(!document.getElementById("end-date").value.replace(/^\s+|\s+$/g, '').match(/(\d{2}\/){2}\d{4}/)) alert("Provide a valid end date!");
