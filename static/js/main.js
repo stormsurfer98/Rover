@@ -117,7 +117,7 @@ function findHotel(longitude, latitude) {
 		type: "GET"
 	});
 	request.complete(function(data) {
-		var allocated = budget*.25;
+		var allocated = budget*0.25;
 		var output = [];
 		for(var i=0; i<data["HotelCount"]; i++) {
 			if(parseInt(data["HotelInfoList"]["HotelInfo"][i]["FeaturedOffer"]["Price"]["TotalRate"]) <= allocated) {
@@ -127,7 +127,7 @@ function findHotel(longitude, latitude) {
 					"Check-in: " + data["HotelInfoList"]["HotelInfo"][i]["Name"],
 					parseInt(data["HotelInfoList"]["HotelInfo"][i]["FeaturedOffer"]["Price"]["TotalRate"]),
 					data["HotelInfoList"]["HotelInfo"][i]["DetailsUrl"]
-				]
+				];
 				break;
 			}
 		}
@@ -139,5 +139,5 @@ function findHotel(longitude, latitude) {
 		output[2] = output[2].replace("Check-in", "Check-out");
 		output[3] = 0;
 		addToTable(output);
-	}
+	});
 }
