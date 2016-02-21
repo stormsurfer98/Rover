@@ -497,7 +497,6 @@
     });
   }
 
-  var savings = 0;
   function getData(userId) {
     $.get("/purchases/" + userId, function(data) {
       var moneyFor = {};

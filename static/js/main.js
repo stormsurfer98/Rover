@@ -1,6 +1,7 @@
 var startDate, endDate, startString, endString, lastTime, leaveTime;
 var months = 6;
-var budget = 5000//savings*months;
+var budget = savings*months;
+console.log(budget);
 
 function planTrip() {
 	if(!destination) alert("Nowhere to go!");
@@ -146,7 +147,11 @@ function findHotel(longitude, latitude) {
 		output[2] = output[2].replace("Check-in", "Check-out");
 		budget = budget - output[3];
 		output[3] = 0;
-		//do stuff
+		findFoodandEvents(longitude, latitude);
 		addToTable(output);
 	});
+}
+
+function findFoodandEvents(longitude, latitude) {
+	
 }
