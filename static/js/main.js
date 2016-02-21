@@ -71,11 +71,12 @@ function findFlight() {
     });
     request.complete(function(data) {
     	console.log(data);
-      var departureTime1 = formatDate(data["responseJSON"]["trips"]["tripOption"][0]["slice"][0]["segment"][0]["leg"]["departureTime"]);
-      var arrivalTime1 = formatDate(data["responseJSON"]["trips"]["tripOption"][0]["slice"][0]["segment"][0]["leg"]["arrivalTime"]);
+    	console.log(data["responseJSON"]);
+      var departureTime1 = formatDate(data["responseJSON"]["trips"]["tripOption"][0]["slice"][0]["segment"][0]["leg"][0]["departureTime"]);
+      var arrivalTime1 = formatDate(data["responseJSON"]["trips"]["tripOption"][0]["slice"][0]["segment"][0]["leg"][0]["arrivalTime"]);
       var startTime = departureTime1 + " to " + arrivalTime1;
-      var departureTime2 = formatDate(data["responseJSON"]["trips"]["tripOption"][0]["slice"][1]["segment"][0]["leg"]["departureTime"]);
-      var arrivalTime2 = formatDate(data["responseJSON"]["trips"]["tripOption"][0]["slice"][1]["segment"][0]["leg"]["arrivalTime"]);
+      var departureTime2 = formatDate(data["responseJSON"]["trips"]["tripOption"][0]["slice"][1]["segment"][0]["leg"][0]["departureTime"]);
+      var arrivalTime2 = formatDate(data["responseJSON"]["trips"]["tripOption"][0]["slice"][1]["segment"][0]["leg"][0]["arrivalTime"]);
       var endTime = departureTime2 + " to " + arrivalTime2;
       var name1 = airportFrom + " to " + airportTo + "(" + data["responseJSON"]["trips"]["tripOption"][0]["slice"][0]["flight"]["carrier"] + data["responseJSON"]["trips"]["tripOption"][0]["slice"][0]["flight"]["number"] + ")";
       var name2 = airportTo + " to " + airportFrom + "(" + data["responseJSON"]["trips"]["tripOption"][0]["slice"][1]["flight"]["carrier"] + data["responseJSON"]["trips"]["tripOption"][0]["slice"][1]["flight"]["number"] + ")";
