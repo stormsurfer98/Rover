@@ -61,7 +61,7 @@ function findFlight() {
         "refundable": false
       }
     };
-    $.get("https://www.googleapis.com/qpxExpress/v1/trips/search?api_key=1c5694b4-90da-4e17-89b1-12862c708769", passInfo, function(data) {
+    $.post("https://www.googleapis.com/qpxExpress/v1/trips/search?key=1c5694b4-90da-4e17-89b1-12862c708769", passInfo, function(data) {
       var departureTime1 = formatString(data["tripOption"][0]["slice"][0]["segment"]["leg"]["departureTime"]);
       var arrivalTime1 = formatString(data["tripOption"][0]["slice"][0]["segment"]["leg"]["arrivalTime"]);
       var startTime = departureTime1 + " to " + arrivalTime1;
