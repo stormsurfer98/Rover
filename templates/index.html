@@ -7,6 +7,7 @@
 		<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBHUfsS5k8fWdr6V_151x2kFKoRgTUx_Io&libraries=places" async defer></script>
 		<script type="text/javascript" src="{{ url_for('static', filename='js/jquery-1.11.3.min.js') }}"></script>
 		<script type="text/javascript" src="{{ url_for('static', filename='js/main.js') }}"></script>
+		<script type="text/javascript" src="{{ url_for('static', filename='js/Chart.min.js') }}"></script>
 		<title>Rover: Budget Your Trip, One Step at a Time</title>
 		<!-- META DATA -->
 		<meta http-equiv="content-type" content="text/html;charset=UTF-8">
@@ -96,12 +97,9 @@
 																</p>
 																<div class="row">
 																	<div class="col-lg-12 col-md-6 col-md-12 animated" data-animation="fadeIn" data-animation-delay="200">
-																		<div style="border: 2px solid black">
 																			<center>
-																				<canvas id="budgetChart" width="150" height="200"></canvas>
-																				<canvas id="distributionChart" width="150" height="200"></canvas>
+                                        <canvas id="budgetChart" width="200" height="200"></canvas>
 																			</center>
-																		</div>
 																	</div>
 																</div>
 																<br>
@@ -110,7 +108,7 @@
 																		<div class="col-lg-1 col-md-6 col-md-12 animated" data-animation="fadeIn" data-animation-delay="200" style="margin-right: -18px;">
 																		</div>
 																		<div class="col-lg-8 col-md-6 col-md-12 animated" data-animation="fadeIn" data-animation-delay="200" style="padding-top: 10px">
-																			<strong>Expected Monthly Savings:</strong> $XXX.XX x
+                                      <strong>Expected Monthly Savings:</strong> $<span id="my_money">XXX.XX</span> x
 																		</div>
 																		<div class="col-lg-3 col-md-6 col-md-12 animated" data-animation="fadeIn" data-animation-delay="200" style="margin-left: -25px;">
 																			<input type="text" name="contact-subject" placeholder="Months" class="contact-form-subject required">
