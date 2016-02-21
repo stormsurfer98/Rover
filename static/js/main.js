@@ -37,7 +37,7 @@ function findFlight() {
   $.get(url, function(data) {
     airportTo = data.response.airports_by_cities[0];
     var passInfo = {
-  "request": {
+  	"request": {
     "slice": [
       {
         "origin": "DTW",
@@ -64,7 +64,7 @@ function findFlight() {
     /*$.post("https://www.googleapis.com/qpxExpress/v1/trips/search?key=AIzaSyBHUfsS5k8fWdr6V_151x2kFKoRgTUx_Io", JSON.stringify(passInfo), function(data) {*/
     var request = $.ajax({
 	  	url: "https://www.googleapis.com/qpxExpress/v1/trips/search?key=AIzaSyBHUfsS5k8fWdr6V_151x2kFKoRgTUx_Io",
-	  	data: passInfo,
+	  	data: JSON.stringify(passInfo),
 	  	contentType: "application/json",
 	  	async: true,
 	  	type: "POST"
