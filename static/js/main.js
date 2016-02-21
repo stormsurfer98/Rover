@@ -37,7 +37,7 @@ function findFlight() {
   $.get(url, function(data) {
     airportTo = data.response.airports_by_cities[0];
     var passInfo = {
-      "request": JSON.stringify({
+      "request": {
         "slice": [
           {
             "origin": airportFrom,
@@ -59,7 +59,7 @@ function findFlight() {
         },
         "solutions": 1,
         "refundable": false
-      })
+      }
     };
     $.post("https://www.googleapis.com/qpxExpress/v1/trips/search?key=AIzaSyBHUfsS5k8fWdr6V_151x2kFKoRgTUx_Io", passInfo, function(data) {
       var departureTime1 = formatString(data["tripOption"][0]["slice"][0]["segment"]["leg"]["departureTime"]);
@@ -74,7 +74,8 @@ function findFlight() {
 
       addToTable([startDate, startTime, name1, price, ""]);
       addToTable([endDate, endTime, name2, price, ""]);
-    });
+    },
+    "json");
   });
 }
 
