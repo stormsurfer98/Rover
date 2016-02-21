@@ -7,7 +7,6 @@ function planTrip() {
 	budget = savings*months;
 	if(document.getElementById("percent").value.replace(/^\s+|\s+$/g, '') !== "") budget *= parseFloat(document.getElementById("percent").value.replace(/^\s+|\s+$/g, ''))/100;
 	if(document.getElementById("manual").value.replace(/^\s+|\s+$/g, '') !== "") budget = parseInt(document.getElementById("manual").value.replace(/^\s+|\s+$/g, ''));
-	console.log(budget);
 	if(!destination) alert("Nowhere to go!");
 	else if(!document.getElementById("start-date").value.replace(/^\s+|\s+$/g, '').match(/(\d{2}\/){2}\d{4}/)) alert("Provide a valid start date!");
 	else if(!document.getElementById("end-date").value.replace(/^\s+|\s+$/g, '').match(/(\d{2}\/){2}\d{4}/)) alert("Provide a valid end date!");
@@ -19,6 +18,10 @@ function planTrip() {
 		document.getElementById("rows").innerHTML = "";
 		findFlight();
 	}
+}
+
+function removeRow(element) {
+	element.parentElement.innerHTML = "";
 }
 
 function addMinutes(time, minutes) {
